@@ -1,9 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Navbar.css'
 import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
   const location = useLocation();
+  const [quote, setQuote] = useState(null);
+  const [author, setAuthor] = useState(null);
+  const [isModelOpen, setIsModelOpen] = useState(false);
+
+  const fetchQuote = async () => {
+    try {
+      const response = await fetch('https://quotes-api-self.vercel.app/quote');
+      const data = await response.json();
+      console.log(data);
+      setQuote(data.quote);
+      setAuthor(data.author);
+      setIsModelOpen(true);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     console.log(location);
@@ -22,13 +38,23 @@ const Navbar = () => {
           <Link to={"/report"}>⌛ Report</Link>
         </li>
         <li>
-          <Link to={"/"}>💡 Get Quote</Link>
+          <div className="quote-btn" onClick={fetchQuote}>💡 Get Quote</div>
         </li>
         <li>
           <Link to={"/"}>🔄️ Reset</Link>
         </li>
-        
       </ul>
+      {
+        isModelOpen && (
+          <div className='model-overlay'>
+            <div className='model-content'>
+              <p>{quote}</p>
+              <p>by <strong>{author}</strong></p>
+              <button className='cls-btn' onClick={() => setIsModelOpen(false)}>Close</button>
+            </div>
+          </div>
+        )
+      }
     </nav>
   )
 }

@@ -1,7 +1,9 @@
 import React from 'react'
 import './Transaction.css'
+import { useNavigate } from 'react-router-dom';
 
 const Transaction = () => {
+  const navigate = useNavigate();
   const existingTransactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
   const categoryEmojis = {
@@ -11,6 +13,19 @@ const Transaction = () => {
     "Transport": "🚗",
     "Entertainment": "🎭",
     "Others": "📜"
+  }
+
+  const handleEdit = (index) => {
+    const editTransaction = existingTransactions[index]
+    navigate("/add-transaction", 
+      {
+        state : {transaction: {...editTransaction, index}
+      },
+    });
+  }
+
+  const handleDelete = () => {
+
   }
 
   return (
@@ -39,9 +54,9 @@ const Transaction = () => {
                 <td>{tx.type}</td>
                 <td>
                   <div className='action-buttons'>
-                    <button className='edit-btn'>
+                    <button className='edit-btn' onClick={() => handleEdit(index)}>
                     ✏️ Edit</button>
-                    <button className='delete-btn'> 🗑️ Delete</button>
+                    <button className='delete-btn' onClick={() => handleDelete(index)}> 🗑️ Delete</button>
                   </div>
                 </td>
               </tr>
