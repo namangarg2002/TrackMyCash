@@ -4,7 +4,7 @@ import Transaction from './Pages/Transaction';
 import Report from './Pages/Report';
 import Navbar from './Components/Navbar';
 import NotFound from './Pages/NotFound';
-import AddTransaction from './Components/AddTransaction';
+import AddTransaction from './Pages/AddTransaction';
 import Dashboard from './Pages/Dashboard';
 
 function App() {

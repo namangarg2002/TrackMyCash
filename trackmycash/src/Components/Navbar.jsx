@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import './Navbar.css'
-import { Link, useLocation } from 'react-router-dom'
+import '../Styles/Navbar.css'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const location = useLocation();
   const [quote, setQuote] = useState(null);
   const [author, setAuthor] = useState(null);
   const [isModelOpen, setIsModelOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const fetchQuote = async () => {
     try {
@@ -24,6 +26,12 @@ const Navbar = () => {
   useEffect(() => {
     console.log(location);
   },[location]);
+
+  function handleReset() {
+    localStorage.clear();
+    navigate("/")
+  }
+
   return (
     <nav className='navbar'>
       <h1 className='logo'>TrackMyCash</h1>
@@ -41,7 +49,7 @@ const Navbar = () => {
           <div className="quote-btn" onClick={fetchQuote}>💡 Get Quote</div>
         </li>
         <li>
-          <Link to={"/"}>🔄️ Reset</Link>
+          <div className='reset-btn' onClick={handleReset}>🔄️ Reset</div>
         </li>
       </ul>
       {

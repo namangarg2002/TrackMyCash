@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import './AddTransaction.css'
+import React, { useEffect, useState } from 'react'
+import '../Styles/AddTransaction.css'
+import { useLocation } from 'react-router-dom';
 
 const AddTransaction = () => {
 
@@ -9,12 +10,15 @@ const AddTransaction = () => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
 
+  const location = useLocation();
+  const [transaction, setTransaction] = useState([]);
+  const [editIndex, setEditIndex] = useState(null);
+
   function handleAddTransaction(e){
     console.log(type, amount, category, description, date);
     if(!amount || !category || !date){
       return alert("Please fill all the fields!!")
     }
-    const existingTransactions = JSON.parse(localStorage.getItem("transactions")) || [];
     const currentTransaction = {
       type: type,
       amount: parseFloat(amount),
@@ -22,17 +26,46 @@ const AddTransaction = () => {
       description,
       date
     }
-    const newTransactions = [...existingTransactions, currentTransaction];
-    console.log(existingTransactions);
+    let newTransactions;
+    if(editIndex == null){
+      newTransactions = [...transaction, currentTransaction];
+    }else{
+      newTransactions = [...transaction];
+      newTransactions[editIndex] = currentTransaction;
+    }
+
+    console.log(transaction);
+    setTransaction(newTransactions)
     console.log(newTransactions);
     localStorage.setItem("transactions", JSON.stringify(newTransactions));
-    alert("Transaction added Succesfully!!");
+    if(editIndex != null){
+      alert(`${type} updated successfully!!`)
+    }else{
+      alert("Transaction added Succesfully!!");
+    }
     setType("Expense");
     setAmount("");
     setCategory("");
     setDescription("");
     setDate("");
   }
+
+  useEffect(() => {
+    const existingTransactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    setTransaction(existingTransactions);
+    console.log(location.state);
+    if(location.state && location.state.transaction){
+      const transaction = location.state.transaction;
+      setType(transaction.type);
+      setAmount(transaction.amount);
+      setCategory(transaction.category);
+      setDescription(transaction.description);
+      setDate(transaction.date);
+
+      setEditIndex(transaction.index);
+    }
+
+  }, [location])
 
   return (
     <div className='add-transaction-container'>
@@ -58,7 +91,7 @@ const AddTransaction = () => {
         </select>
         <textarea value={description} placeholder='Description' onChange={(e) => setDescription(e.target.value)}></textarea>
         <input value={date} type="date" onChange={(e) => setDate(e.target.value)}/>
-        <button onClick={handleAddTransaction}>Add Transaction</button>
+        <button onClick={handleAddTransaction}>{editIndex === null ? 'Add Transaction' : 'Update Transaction'}</button>
       </div>
     </div>
   )
