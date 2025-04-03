@@ -1,7 +1,6 @@
 # TrackMyCash - Expense Tracker
 
-![TrackMyCash Logo](https://via.placeholder.com/150) 
-</svg>ing logo-reaper-svgrepo-com.svg…]()
+![TrackMyCash Logo]
 
 
 
