@@ -1,10 +1,5 @@
 # TrackMyCash - Expense Tracker
 
-![TrackMyCash Logo]
-
-
-
-![logo-reaper-svgrepo-com](https://github.com/user-attachments/assets/fa0cc9af-bdbb-4a55-b1c2-494e194e04ce)
 
 ## Live Demo
 
