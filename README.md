@@ -63,3 +63,49 @@ git clone https://github.com/your-username/TrackMyCash.git
 cd TrackMyCash
 npm install
 npm start
+
+
+
+## Usage Guide
+
+### Adding Transactions:
+1. Navigate to Dashboard or Transaction page
+2. Click "+ Add Transaction" button
+3. Fill in the transaction details
+4. Click "Add Transaction" to save
+
+### Editing Transactions:
+1. Go to the Transaction page
+2. Click "Edit" button on the transaction
+3. Make changes in the form
+4. Click "Update Transaction" to save
+
+### Viewing Reports:
+1. Navigate to the Report page
+2. Select a month from the dropdown
+3. View financial charts and breakdowns
+
+## API Used
+**Quotes API**: `https://quotes-api-self.vercel.app/quote`
+
+## Future Enhancements
+- [ ] User authentication system
+- [ ] Cloud synchronization
+- [ ] Budget tracking
+- [ ] Export/Import data
+- [ ] Dark mode
+- [ ] Recurring transactions
+
+## Contributing
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## License
+MIT License
+
+---
+
+Developed with ❤️ by Naman Garg
