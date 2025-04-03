@@ -64,6 +64,8 @@ cd TrackMyCash
 npm install
 npm start
 
+```
+
 
 
 ## Usage Guide
