@@ -1,5 +1,7 @@
 # TrackMyCash - Expense Tracker
 
+![android-icon-96x96](https://github.com/user-attachments/assets/bfa64ea4-5dce-411a-91bb-e9ee2bee7872)
+
 
 ## Live Demo
 
